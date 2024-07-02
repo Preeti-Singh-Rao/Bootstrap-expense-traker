@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTotal(amount) {
         total += amount;
-        totalAmount.textContent = total.toFixed(2);
+        totalAmount.textContent = total;
     }
 
     function clearForm() {
