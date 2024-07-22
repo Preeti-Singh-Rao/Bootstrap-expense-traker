@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const expenseForm = document.getElementById('expense-form');
     const expenseName = document.getElementById('expense-name');
     const expenseAmount = document.getElementById('expense-amount');
+    const expensetype = document.getElementById('expense-type');
     const expenseList = document.getElementById('expense-list');
     const totalAmount = document.getElementById('total-amount');
  
@@ -14,19 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const name = expenseName.value;
         const amount = parseFloat(expenseAmount.value);
+        const typeofExpanse=expensetype.value;
 
-        if (name && amount) {
-            addExpense(name, amount);
+        if (name && amount && typeofExpanse) {
+            addExpense(name, amount,typeofExpanse);
             updateTotal(amount);
             clearForm();
            
         }
     });
 
-    function addExpense(name, amount) {
+    function addExpense(name, amount,typeofExpanse) {
         const liTag = document.createElement('li');
         liTag.className = 'list-group-item d-flex justify-content-between align-items-center';
-        liTag.innerHTML = name + " " + " " + amount + "Rs."
+        liTag.innerHTML = name + " " + " " + amount + "Rs." + " "+ typeofExpanse
 
     let deleteBtn=document.createElement('button');
     deleteBtn.innerText='delete';
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let editBtn=document.createElement('button');
     editBtn.innerText='Edit';
     editBtn.className = 'btn btn-warning btn-sm ml-2';
-    editBtn.addEventListener('click', ()=>editExpense(liTag,name,amount))
+    editBtn.addEventListener('click', ()=>editExpense(liTag,name,amount,typeofExpanse))
 
             
 
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearForm() {
         expenseName.value = '';
         expenseAmount.value = '';
+        expensetype.value='';
     }
 
     function deleteExpense(liTag,amount){
@@ -62,9 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
      totalAmount.textContent=total;
     }
 
-    function editExpense(liTag,name,amount){
+    function editExpense(liTag,name,amount,typeofExpanse){
         expenseName.value = name;
         expenseAmount.value = amount;
+        expensetype.value=typeofExpanse;
         deleteExpense(liTag, amount);
     }
 });
